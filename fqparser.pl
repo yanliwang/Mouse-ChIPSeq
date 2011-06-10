@@ -4,6 +4,7 @@
 #Input: fastq file with quality scores in Solexa (-5 to 40) represented as integers 
 #Output: fastq file with quality scores in Illumina 1.3+ (0 to 40), represented as characters (Phred+64: '@' to 'h')
 
+
 use warnings;
 use strict;
 use POSIX;
