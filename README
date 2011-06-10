@@ -1,0 +1,55 @@
+For instructions on the program scripts, please read the comments. If you have other questions, email me at yanly.wang@gmail.com
+
+Below describes the files contained within ywang/work/E17andPN15
+* could refer to E17 or PN15
+
+###############################################
+Fastq files that had the corrected quality scores:
+*_new.fq
+Sam files of all the reads, converted from fastq files using Bowtie Aligner
+*.sam
+Bam files and indexed bam files, converted from sam files using Samtools
+*.bam
+*.bam.bai
+
+###############################################
+Number of times the sequences (defined by *.bam files) fall within the defined upstream and downstream region of the gene
+*_count.txt
+Like previous, without considering Chr?_rand entries
+*_count_norand.txt
+
+###############################################
+Gff files converted from *.sam with 'more *.sam | python -m hiseq.sam2gff  > *.gff
+*.gff
+GeneTrack files converted from *.gff with 'python -m hiseq.tabs2genetrack' (use -s *SHIFT option)
+*.tab (unshifted)
+E17-shift35-peaks-5.00.gff -> Peaks-sigma-50.0-width-70-E17-shift35.txt.gff (shifted by 35 in 5' direction, peaks with value > 5.00 only)
+PN15-shift37-peaks-2.00.gff -> Peaks-sigma-50.0-width-74-PN15-shift37.txt.gff (shited by 37 in 5' direction, peaks with value > 3.00 only)
+Peaks files created by GeneTrack
+Any file beginning with Peaks*
+
+###############################################
+Peaks Files
+GeneTrack files
+E17-shift35-peaks-all.txt -> Peaks-sigma-50.0-width-70-E17-shift35.txt.txt (shifted by 35 in 5' direction, all peaks, strand composite)
+PN15-shift37-peaks-all.txt -> Peaks-sigma-50.0-width-74-PN15-shift37.txt.txt (shifted by 37 in 5' direction, all peaks, strand composite)
+Gff files, converted from GeneTrack Peak Files with 'python -m gtrack.misc.peaks2gff *.txt > *.gff'
+E17-shift35-peaks-5.00.gff -> Peaks-sigma-50.0-width-70-E17-shift35.txt.gff (shifted by 35 in 5' direction, peaks with value > 5.00 only, strand composite)
+PN15-shift37-peaks-2.00.gff -> Peaks-sigma-50.0-width-74-PN15-shift37.txt.gff (shited by 37 in 5' direction, peaks with value > 3.00 only, strand composite)
+Bam files, converted to sam from gff with BamToBed (for -g option, use /export/tools/src/BEDTools-Version-2.12.0/genomes/mouse.mm9.genome), then to bam and indexed bam with Samtools
+*-peaks.bam
+*-peaks.bam.bai
+
+###############################################
+References:
+ucsc-mouse-genes-table.txt (UCSC Genome Table Gene List, bin numbers are unique but RefSeq not necessarily are)
+mouse-gene-symbol.txt (RefSeq to gene symbol to DAVID annotation)
+mouse-gene-david.txt (RefSeq to DAVID annotation)
+
+###############################################
+Results:
+*-peak-descrpt.txt (lists all peaks around defined interval around each gene's TSS)
+*-peak-descrpt-annot.txt (like above, but in addition to RefSeq ID also has Gene Symbol, DAVID annotation)
+*-david-gene-cluster.txt (DAVID Gene Functional Annotation Cluster output)
+*-CEAS-Report.pdf (reports created by CEAS - Cis-regulatory Element Annotation System)
+E17-PN15-report-final.doc (summarizes all the methods and results)
